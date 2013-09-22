@@ -1,0 +1,27 @@
+<!-- リスト2-4 アサートの単純な実装例 -->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test Suite</title>
+	<script>
+	function assert(value, desc){
+		var li = document.createElement("li");
+		li.className = value ? "pass" : "fail";
+		li.appendChild(document.createTextNode(desc));
+		document.getElementById("results").appendChild(li);
+	}
+	window.onload = function () {
+		assert(true, "テストスイートを実行中");
+		assert(false, "失敗！");
+	};
+	</script>
+	<style>
+		#result li.pass {color:green;}
+		#result li.fail {color:red;}
+	</style>
+</head>
+<body>
+	<ul id="results"></ul>
+</body>
+</html>
