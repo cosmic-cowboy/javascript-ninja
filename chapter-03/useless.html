@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Useless callback example</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<script>
+		var text = "お呼びでない？"
+		function useless (callback) {
+			return callback();
+		}
+		assert(
+			useless(function(){return text;}) === text, 
+			"uselessでcallback " + text
+		);
+	</script>
+</body>
+</html>
