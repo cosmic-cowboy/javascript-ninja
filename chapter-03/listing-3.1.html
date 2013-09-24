@@ -1,0 +1,47 @@
+<!-- リスト3-1 関数宣言の確認 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>関数宣言の確認</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		// bodyタグの中で書かないとbodyがない状態でロードされ、assertでbodyがありませんというエラーが出る
+		function isNimble() {
+			return true;
+		}
+		assert(typeof window.isNimble === 'function', "isNimbleは定義されている")
+		assert(isNimble.name === 'isNimble', "isNimble()には名前がある")
+
+		var canFly = function () {return true;};
+		assert(typeof window.canFly === 'function', "canFlyは定義されている")
+		assert(canFly.name === '', "canFly()には名前がない")
+
+		window.isDeadly = function () {return true;};
+		assert(typeof window.canFly === 'function', "isDeadlyは定義されている")
+		assert(isDeadly.name === '', "isDeadly()には名前がない")
+
+		function outer(){
+			assert(typeof inner === 'function', "inner()は宣言の前にスコープにいる")
+			function inner(){};
+			assert(typeof inner === 'function', "inner()は宣言の後もスコープにいる")
+			assert(window.inner === undefined, "inner()はグローバルスコープには入っていない")
+		}
+
+		outer();
+		assert(window.inner === undefined, "inner()はグローバルスコープには入っていない")
+
+		window.wieldsSword = function swingsSword() {return true;};
+		assert(typeof window.wieldsSword === 'function', "wieldsSwordは定義されている")
+		assert(wieldsSword.name === 'swingsSword', "wieldsSword()の名前はswingsSword")
+
+	</script>
+	
+</body>
+</html>
