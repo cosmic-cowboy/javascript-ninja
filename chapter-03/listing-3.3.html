@@ -1,0 +1,37 @@
+<!-- リスト3-3 関数呼び出しとメソッド呼び出しの違い -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>listing-3.3 関数呼び出しとメソッド呼び出しの違い</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js" type="text/javascript"></script>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+
+    function creep () {
+    	return this;
+    }
+
+    assert(creep() === window, "Creeping in the window");
+
+    var sneak = creep;
+    assert(sneak() === window, "Sneaking in the window");
+
+    var ninja1 = {
+    	skulk : creep
+    };
+    assert(ninja1.skulk() === ninja1, "The 1nd ninja is skulking");
+
+    var ninja2 = {
+    	skulk : creep
+    };
+    assert(ninja2.skulk() === ninja2, "The 2nd ninja is skulking");
+
+	</script>
+</body>
+</html>
