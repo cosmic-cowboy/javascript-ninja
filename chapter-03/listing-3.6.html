@@ -1,0 +1,31 @@
+<!-- リスト3-6 呼び出しコンテクストの設定を示すfor-each関数の構築 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Listing 3.6 呼び出しコンテクストの設定を示すfor-each関数の構築</title>
+    <script type="text/javascript" src="../scripts/assert.js"></script>
+    <link href="../styles/assert.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      function forEach (list, callback) {
+        for (var i = 0; i < list.length; i++) {
+          callback.call(list[i], i);
+        };
+      }
+
+      var weapons = ['shuriken', 'katana', 'nunchucks'];
+
+      forEach(
+        weapons,
+        function (index) {
+          assert(this.toString() === weapons[index], weapons[index] + "は期待した値を得た")
+        }
+      )
+
+    </script>
+  </body>
+</html>
