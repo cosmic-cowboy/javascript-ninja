@@ -1,0 +1,49 @@
+<!-- リスト3-2 宣言スコープの観察 -->
+<!-- TODO outer()内で関数コンテキストをouter()内のコンテキストに変更できるのか、調査する -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>listing-3.2 宣言スコープの観察</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript">
+	function assertOuter(title){
+		assert(true, title);		
+		assert(typeof outer === 'function', "outer()はスコープ内にある");
+		assert(typeof inner === 'function', "inner()はスコープ内にある");
+		assert(typeof a ==='number', "aはスコープ内にある");
+		assert(typeof b ==='number', "bはスコープ内にある");
+		assert(typeof c ==='number', "cはスコープ内にある");
+	}
+
+	assertOuter.call(this, "|====== OUTERの前 =====|");
+
+	function outer () {
+		var that = this;
+		assertOuter.call(that, "|====== OUTERの中, aの宣言の前 =====|");
+
+		var a = 1;
+		assertOuter.call(that, "|====== OUTERの中, aの宣言の後 =====|");
+
+		function inner(){};
+		assertOuter.call(this, "|====== OUTERの中, innerの宣言の後 =====|");
+
+		var b = 2;
+		assertOuter.call(this, "|====== OUTERの中, bの宣言の後 =====|");
+
+		if(a === 1){
+			var c = 3;
+		}
+		assertOuter.call(this, "|====== OUTERの中, cの宣言の後 =====|");
+	}
+	outer();
+
+	assertOuter.call(this, "|====== OUTERの後 =====|");
+
+	</script>
+</body>
+</html>
