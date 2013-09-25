@@ -1,0 +1,44 @@
+<!-- chapter04：リスト4-8 ユニークな関数コレクションの追加 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ユニークな関数コレクションの追加</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+		var store = {
+			// 関数を一意で識別するためのユニークID
+			nextId : 1,
+
+			// 関数を格納するキャッシュオブジェクト
+			cache : {},
+
+			// 関数をキャッシュオブジェクトに追加するメソッド
+			// IDの重複チェックを行っている
+			add : function (fn) {
+				if(!fn.id){
+					fn.id = store.nextId++;
+					return !!(store.cache[fn.id] = fn);
+				}
+			}
+
+		};
+
+		function ninja(){};
+
+		// 一回目は追加される
+		assert(store.add(ninja), "関数は安全に追加された");
+		// 二回目は追加されない
+		assert(!store.add(ninja), "ただし一度だけ");
+
+	</script>
+	
+</body>
+</html>
