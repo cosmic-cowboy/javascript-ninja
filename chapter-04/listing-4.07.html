@@ -1,0 +1,32 @@
+<!-- chapter04：リスト4-7 arguments.calleeを使って、呼び出し側関数を参照する -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>arguments.calleeを使って、呼び出し側関数を参照する</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+		var ninja = {
+			chirp : function (n) {
+				return n > 1 ? arguments.callee(n-1) + " - chirp" : "chirp";
+			}
+		}
+
+		var result;
+
+		assert(
+			(result = ninja.chirp(3)) === "chirp - chirp - chirp", 
+			"arguments.calleeは、その関数自身である：" + result
+		);
+
+	</script>
+	
+</body>
+</html>
