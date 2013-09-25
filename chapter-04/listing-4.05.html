@@ -1,0 +1,51 @@
+<!-- chapter04：リスト4-5 インライン関数を再帰呼び出しに使う -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>インライン関数を再帰呼び出しに使う</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+
+		// オブジェクトのプロパティとして、再帰的な関数を宣言する
+		// 関数は名前つき関数
+		// 再帰呼び出しは呼び出しコンテクスト（this）を利用する
+		// 再帰呼び出しの関数がメソッドで定義されているメソッド名ではなく、
+		// 名前つき関数にして、外部の影響を受けずに呼び出す
+		var ninja = {
+			signal : function signal(n) {
+				return n > 1 ? signal(n-1) + " - chirp" : "chirp";
+			}
+		}
+		assert(
+				(result = ninja.signal(3)) === "chirp - chirp - chirp", 
+				"ninja.signal関数の呼び出しが想定通り行われる 結果：" + result
+			);
+
+		// オブジェクトのプロパティ名（chirp）を元（signal）と異なる名称で変数に代入
+		var sumrai = {chirp : ninja.signal}
+
+		ninja = {}
+
+		try{
+			var result;
+
+			assert(
+				(result = sumrai.chirp(3)) === "chirp - chirp - chirp", 
+				"sumrai.chirp関数の呼び出しが想定通り行われる 結果：" + result
+			);
+
+		}catch(e){
+			assert(false, "ダメだ。sumrai.chirpが実行できない。ninjaがいなくなったから")
+		}
+	</script>
+	
+</body>
+</html>
