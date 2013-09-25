@@ -1,0 +1,35 @@
+<!-- chapter04：リスト4-1 無名関数の一般的な使い方 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>無名関数</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		// window の load イベントに対応するイベントハンドラです。
+		// イベント発生時に呼び出す関数（無名関数）を設定
+		window.onload = function () {assert(true, 'power!'); };
+
+		// オブジェクトのプロパティに無名関数を設定
+		// いわゆるメソッド
+		var ninja = {
+			shout : function () { assert(true, 'Ninja!'); }
+		}
+		ninja.shout();
+
+		// setTimeoutメソッドの引数に無名関数を設定
+		// タイムアウト時に呼び出されるコールバックとして設定
+		setTimeout(function () {
+			assert(true, 'Forever!');
+		}, 500);
+
+	</script>
+	
+</body>
+</html>
