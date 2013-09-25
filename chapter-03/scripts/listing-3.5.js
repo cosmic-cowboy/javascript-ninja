@@ -1,15 +1,8 @@
-<!-- リスト3-5 apply/callメソッドで呼び出しコンテクストを提供する -->
+//  リスト3-5 apply/callメソッドで呼び出しコンテクストを提供する
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Listing 3.5 apply/callメソッドで呼び出しコンテクストを提供する</title>
-    <script type="text/javascript" src="../scripts/assert.js"></script>
-    <link href="../styles/assert.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <script type="text/javascript">
+define(function() {
+
+  function listing_3_5(){
 
       function juggle () {
         var result = 0;
@@ -30,7 +23,6 @@
       assert(ninja1.result === 10, "juggled via apply / add items : " + ninja1.values + "/ result : " + ninja1.result);
       assert(ninja2.result === 26, "juggled via call  / add items : " + ninja2.values + "/ result : " + ninja2.result);
 
-
-    </script>
-  </body>
-</html>
+  }
+  return listing_3_5;
+});
