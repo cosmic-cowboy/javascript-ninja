@@ -1,0 +1,27 @@
+<!-- chapter04：リスト4-2 名前付き関数の再帰 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>名前付き関数の再帰</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		// 再帰呼び出しをする関数を宣言する
+		// 再帰の条件「自己参照」「終了の収束」の２つを満たしている
+		function chirp (n) {
+			return n > 1 ? chirp(n-1) + " - chirp" : "chirp";
+		}
+		var result;
+
+		// 関数を呼び出す
+		assert((result = chirp(3)) === "chirp - chirp - chirp", "名前付き関数の呼び出しが想定通り行われる 結果：" + result);
+	</script>
+	
+</body>
+</html>
