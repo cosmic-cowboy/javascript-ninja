@@ -1,0 +1,30 @@
+<!-- chapter04：リスト4-6 インライン関数のアイデンティティを確認する -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>インライン関数のアイデンティティを確認する</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+		// 名前つき関数は変数にも代入可能
+		var ninja = function myNinja(){
+			// 変数内部では変数と関数名は同じ
+			assert(ninja === myNinja, "ninjaとmyNinjaは関数内では同じに扱われる");
+		}
+
+		ninja();
+
+		// インライン関数はインライン関数の外部では参照できない
+		assert(typeof myNinja === 'undefined', "ただし、myNinjaは関数の外側では定義されていない");
+
+	</script>
+	
+</body>
+</html>
