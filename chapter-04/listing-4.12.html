@@ -1,0 +1,36 @@
+<!-- chapter04：リスト4-12 可変長引数リストを辿る -->
+<!-- argumentsを活用すると複雑で知的なメソッドを作成することが可能になる。たとえば関数多重定義など -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>可変長引数リストを辿る</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		function merge (root) {
+			for (var i = 1; i < arguments.length; i++) {
+				for (var key in arguments[i]) {
+					root[key] = arguments[i][key]
+				}
+			}
+			return root;
+		};
+
+		var merged = merge(
+			{name : "Batou"},
+			{city : "Niihama"}
+		);
+
+		assert(merged.name === "Batou", "元と同じ名前");
+		assert(merged.city === "Niihama", "cityもコピーされている");
+	</script>
+	
+</body>
+</html>
