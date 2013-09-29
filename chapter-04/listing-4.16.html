@@ -1,0 +1,79 @@
+<!-- chapter04：リスト4-16 addMethod()関数をテスト-->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>addMethod()関数をテスト</title>
+	<script src="addMethod.js" type="text/javascript"></script>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+
+	<script type="text/javascript">
+
+		// 関数のlengthプロパティを確認
+		assert(true, "関数のlengthプロパティを確認");
+		function makeNinja(name){}
+		function makeSamurai(name, rank){}
+		assert(makeNinja.length === 1, "引数が1つであることを期待している");
+		assert(makeSamurai.length === 2, "引数が2つであることを期待している");
+		assert(true, "");
+		assert(true, "");
+
+
+		// リスト4-16 addMethod()関数をテスト
+		assert(true, "リスト4-16 addMethod()関数をテスト");
+
+		// 基底オブジェクト
+		var ninjas = {
+			values : ["Dean Edwards", "Sam Stephenson", "Alex Russell"]
+		};
+
+		// 基底オブジェクトに最初に代入されるメソッド（引数0）
+		// ※これにはoldは存在しないので、これが実行されないという自体は起こらない
+		addMethod(ninjas, "find", function () {
+			return this.values;
+		});
+
+		// 基底オブジェクトに代入されるメソッド（引数1）
+		addMethod(ninjas, "find", function (name) {
+			var ret = [];
+			for (var i = 0; i < this.values.length; i++) {
+				if(this.values[i].indexOf(name) === 0){
+					ret.push(this.values[i]);
+				}
+			}
+			return ret;
+		});
+
+		// 基底オブジェクトに代入されるメソッド（引数2）
+		addMethod(ninjas, "find", function (first, name) {
+			var ret = [];
+			for (var i = 0; i < this.values.length; i++) {
+				if(this.values[i] === (first + " " + name)){
+					ret.push(this.values[i]);
+				}
+			}
+			return ret;
+		});
+
+		var parameter_0 = ninjas.find()
+		assert(parameter_0.length === 3, "すべての忍者を見つけた:" + parameter_0);
+
+		var parameter_1 = ninjas.find("Sam")
+		assert(parameter_1.length === 1, "ファーストネームで忍者を見つけた:" + parameter_1);
+
+		var parameter_2 = ninjas.find("Dean", "Edwards")
+		assert(parameter_2.length === 1, "フルネームで忍者を見つけた:" + parameter_2);
+
+		var parameter_3 = ninjas.find("Alex", "Russell", "Jr");
+		assert(parameter_3 == null, "該当なし");
+
+	</script>
+	
+</body>
+</html>
