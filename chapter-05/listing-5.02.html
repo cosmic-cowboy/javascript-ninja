@@ -1,0 +1,38 @@
+<!-- chapter05：リスト5-2 それほど単純ではないクロージャ -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-2 それほど単純ではないクロージャ</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		var outerValue = 'ninja';
+		var later;
+		function outerFunction () {
+			var innerValue = 'samurai';
+
+			// 関数宣言が定義されただけでなく、クロージャが作成される
+			// クロージャは線現時点でスコープ内にあったすべての変数を包括する
+			// 呼び出された際、変数がないとしても、
+			// クロージャを通じて、元のスコープを通じてアクセスできる
+			function innerFunction () {
+				assert(outerValue, 'ninjaが見える');
+				assert(innerValue, 'sumuraiが見える');
+			}
+
+			later = innerFunction;
+		}
+
+		outerFunction();
+		later();
+
+	</script>
+	
+</body>
+</html>
