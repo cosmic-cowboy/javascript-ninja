@@ -1,0 +1,36 @@
+<!-- chapter04：リスト4-11 配列のための汎用的なmin(), max()関数 -->
+<!-- 配列に最小値、最大値を表す処理がないので、Mathのmax,minを借用する -->
+<!-- Mathのmax,minは可変長引数を取るが、配列は取らない。このままでは使えない -->
+<!-- そこでapplyを活用する。applyは引数を配列にして、第二引数に渡すようになっている -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>配列のための汎用的なmin(), max()関数</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+
+	<script type="text/javascript">
+
+		function smallest (array) {
+			return Math.min.apply(Math, array);
+		}
+
+		function largest (array) {
+			return Math.max.apply(Math, array);
+		}
+		var testArray  = [0,1,2,3];
+		var minNum = 0;
+		var maxNum = 3;
+		assert(smallest(testArray) === minNum, "配列：" + testArray + "の最小値は" + minNum + "です");
+		assert(largest(testArray) === maxNum, "配列：" + testArray + "の最大値は" + maxNum + "です");
+
+	</script>
+	
+</body>
+</html>
