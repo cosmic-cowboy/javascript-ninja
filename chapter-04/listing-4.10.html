@@ -1,0 +1,42 @@
+<!-- chapter04：リスト4-10 配列のようなメソッドをシュミレートする -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>配列のようなメソッドをシュミレートする</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+<input id="first">
+<input id="second">
+
+	<script type="text/javascript">
+		var elem = {
+			// 要素のカウンタ
+			length : 0,
+
+			// Arrayのプロトタイプを活用して、要素の追加を実現
+			// pushメソッドはelemのlengthプロパティを配列のプロパティと評価しているため、要素の追加が可能に
+			add : function (elem) {
+				Array.prototype.push.call(this, elem);
+			},
+
+			gather : function (id) {
+				this.add(document.getElementById(id))
+			}
+		};
+
+		elem.gather("first");
+		assert(elem.length === 1 && elem[0].nodeType, "要素の獲得を確認");
+
+		elem.gather("second");
+		assert(elem.length === 2 && elem[1].nodeType, "さらに追加を確認");
+
+	</script>
+	
+</body>
+</html>
