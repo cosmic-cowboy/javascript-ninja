@@ -1,0 +1,47 @@
+<!-- chapter04：リスト4-9 すでに計算した値をメモ化する -->
+<!-- キャッシングと本来の仕事は分離したほうが良い -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ユニークな関数コレクションの追加</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		function isPrime (value) {
+			// 素数のキャッシュを作成
+			if(!isPrime.answer) {
+				isPrime.answer = {};
+			}
+			// キャッシュされた値がないかチェック
+			if(isPrime.answer[value] != null){
+				return isPrime.answer[value];
+			}
+
+			var prime = value != 1;
+
+			// 割り切れたら素数ではないので
+			for (var i = 2; i < value; i++) {
+				if(value % i == 0){
+					prime = false;
+					break;
+				}
+			}
+
+			// 素数を保存
+			return isPrime.answer[value] = prime;
+
+		}
+
+		// テスト
+		assert(isPrime(5), "5は素数！");
+		assert(isPrime.answer[5], "5がキャッシュされている！");
+	</script>
+	
+</body>
+</html>
