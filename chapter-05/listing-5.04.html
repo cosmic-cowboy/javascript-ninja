@@ -1,0 +1,45 @@
+<!-- chapter05：リスト5-4 クロージャを使ってプライベート変数をつくる -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-4 クロージャを使ってプライベート変数をつくる</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+		// コンストラクタを定義
+		function Ninja () {
+			
+			// プライベート変数
+			var feints = 0;
+
+			// アクセサメソッド
+			this.getFeints = function () {
+				return feints;
+			};
+
+			// カウンター
+			// Ninja外からはfeintsにはアクセスできない
+			this.feint = function () {
+				feints++;
+			};
+		}
+
+		var ninja = new Ninja();
+
+		ninja.feint();
+
+		assert(ninja.getFeints() === 1, "フェイント回数をアクセサで読み出せる");
+
+		assert(ninja.feints === undefined, "プライベート変数にはアクセスできない");
+
+	</script>
+	
+</body>
+</html>
