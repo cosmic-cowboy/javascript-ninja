@@ -1,0 +1,39 @@
+<!-- chapter05：リスト5-8 イベントハンドラに特定のコンテクストをバインドする -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-8 イベントハンドラに特定のコンテクストをバインドする</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<button id="test">Click Me!</button>
+
+	<script>
+		// バインド関数を定義する
+		// オブジェクトメソッドの呼び出しを無名関数でラップする
+		function bind (context, name) {
+			return function () {
+				return context[name].apply(context, arguments);
+			}
+		}
+		var button = {
+			clicked : false,
+			click : function () {
+				this.clicked = true,
+				assert(button.clicked, "ボタンがクリックされた");
+				console.log(this);
+			}
+		};
+
+		var elem = document.getElementById("test");
+		elem.addEventListener('click', bind(button, "click"), false);
+
+	</script>
+	
+</body>
+</html>
