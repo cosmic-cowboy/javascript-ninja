@@ -1,0 +1,45 @@
+<!-- chapter05：リスト5-3 クロージャで、ほかに何が見えるのか -->
+<!-- クロージャはすべての情報を収納するので、オーバーヘッドがかかる。メモリに情報を保存している -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-3 クロージャで、ほかに何が見えるのか</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		
+		var outerValue = 'ninja';
+		var later;
+
+		function outerFunction () {
+			var innerValue = 'sumurai';
+
+			function innerFunction (paramValue) {
+				assert(true, '==================');
+				assert(true, 'innerFunctionが呼び出される');
+				assert(true, '==================');
+				assert(outerValue, '内側からninjaが見える');
+				assert(innerValue, '内側からsumuraiが見える');
+				assert(paramValue, '内側からwakizashiが見える');
+				assert(tooLate, '内側からroninが見える');
+			}
+
+			later = innerFunction;
+		}
+
+		assert(!tooLate, "宣言前なのでまだ外側からroninが見えない。")
+
+		var tooLate = 'ronin';
+
+		outerFunction();
+		later('wakizashi');
+	</script>
+	
+</body>
+</html>
