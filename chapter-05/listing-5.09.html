@@ -1,0 +1,40 @@
+<!-- chapter05：リスト5-9 Prototypeライブラリで使われている、関数をバインドするコードの例 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-9 Prototypeライブラリで使われている、関数をバインドするコードの例</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		Function.prototype.bind = function() {
+			var fn = this,
+				args = Array.prototype.slice.call(arguments),
+				object = args.shift();
+
+			return function () {
+				return fn.apply(object, args.concat(Array.prototype.slice.call(arguments)));
+			}
+		};
+
+		var myObject = {};
+
+		// コンテクストがmyObjectであるか、確認
+		function myFunction () {
+			return this === myObject;
+		}
+
+		assert(!myFunction(), "まだコンテクストは設定されていない");
+
+		var aFunction = myFunction.bind(myObject);
+
+		assert(aFunction(), "コンテクストは正しく設定された");
+	</script>
+	
+</body>
+</html>
