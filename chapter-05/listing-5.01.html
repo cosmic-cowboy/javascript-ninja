@@ -1,0 +1,28 @@
+<!-- chapter05：リスト5-1 単純なクロージャ -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>リスト5-1 単純なクロージャ</title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		var outerValue = 'ninja';
+
+		// 関数が外部変数にアクセスし、操作することを可能にする
+		// クロージャにより、宣言されたスコープに入っていた変数および関数のすべてにアクセスできる
+		function outerFunction () {
+			assert(outerValue === 'ninja', 'ninjaが見える');
+		}
+
+		outerFunction();
+
+	</script>
+	
+</body>
+</html>
