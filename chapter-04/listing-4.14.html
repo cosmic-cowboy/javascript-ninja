@@ -1,0 +1,26 @@
+<!-- chapter04：リスト4-14 引数リストをスライスする -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>引数リストをスライスする </title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+
+	<script type="text/javascript">
+
+		function multiMax (multi) {
+
+			return multi * Math.max.apply(Math, Array.prototype.slice.call(arguments, 1));
+		}
+
+		assert(multiMax(3,1,2,3) == 9, "3*3=9(first arg, by largest.)");
+	</script>
+	
+</body>
+</html>
