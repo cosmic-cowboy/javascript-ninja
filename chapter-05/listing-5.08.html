@@ -16,11 +16,16 @@
 	<script>
 		// バインド関数を定義する
 		// オブジェクトメソッドの呼び出しを無名関数でラップする
+		// 第１引数：呼び出しコンテキスト
+		// 第２引数：呼び出す関数名
 		function bind (context, name) {
 			return function () {
+				// この関数内での呼び出しコンテキストはイベントのターゲット要素であるbutton要素
+				// そこで呼び出しコンテキストが別になる関数を呼び出している
 				return context[name].apply(context, arguments);
 			}
 		}
+		// クロージャ
 		var button = {
 			clicked : false,
 			click : function () {

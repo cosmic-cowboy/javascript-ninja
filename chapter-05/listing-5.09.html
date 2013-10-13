@@ -34,6 +34,24 @@
 		var aFunction = myFunction.bind(myObject);
 
 		assert(aFunction(), "コンテクストは正しく設定された");
+
+
+		// 引数をそれぞれの関数に代入するとどうなるか
+		var yourObject = {};
+
+		// コンテクストがyourObjectであるか、確認
+		function yourFunction () {
+			assert(this === yourObject, "コンテクストは正しく設定された");
+			var result = "引数：";
+			for (var i = 0; i < arguments.length; i++) {
+				result += arguments[i] + ", ";
+			};
+			return result.slice(0, -2);
+		}
+
+		var bFunction = yourFunction.bind(yourObject, "bindParam1","bindParam2","bindParam3");
+		assert(true, bFunction("param1","param2","param3"));
+
 	</script>
 	
 </body>

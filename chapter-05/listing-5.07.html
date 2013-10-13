@@ -20,19 +20,23 @@
 				assert(button.clicked, "ボタンがクリックされた");
 			}
 			
-			// 呼び出しコンテキストを両方(this)にするバージョン
+			// // 呼び出しコンテキストを参照するパターン
+			// // 呼び出しコンテキストはbutton要素なので、
+			// // this.clicked = true; では新しくプロパティが生成され、それが参照される
+			// // buttonオブジェクトで定義したclickedは不要。クロージャ関係ない
 			// click : function () {
 			// 	this.clicked = true;
 			// 	assert(this.clicked, "ボタンがクリックされた");
 			// }
 
-			// 呼び出しコンテキストを両方(button)にするバージョン
+
+			// // 宣言された関数を明示的に参照するパターン
 			// click : function () {
 			// 	button.clicked = true;
 			// 	assert(button.clicked, "ボタンがクリックされた");
 			// }
 
-			// 呼び出しコンテキストを暗黙的にbuttonにするバージョン
+			// // 宣言された関数を暗黙的に参照するパターン（クロージャのスコープ）
 			// click : function () {
 			// 	clicked = true;
 			// 	assert(clicked, "ボタンがクリックされた");
@@ -40,6 +44,15 @@
 		};
 
 		var elem = document.getElementById("test");
+
+		// イベントハンドラの呼び出しコンテキストはブラウザのイベント処理システムが定義する
+		// それはイベントのターゲット要素（button要素になる）
+		// 第１引数 type
+		// 対象とするイベントの種類を表す文字列
+		// 第２引数 listener
+		// 指定されたタイプのイベントが発生するときに通知を受け取るオブジェクト
+		// 第３引数　useCapture Optional
+		// イベントフェーズの選択
 		elem.addEventListener("click", button.click, false);
 
 	</script>

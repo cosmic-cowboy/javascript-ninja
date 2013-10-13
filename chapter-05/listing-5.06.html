@@ -21,10 +21,15 @@
 	<div id="box4" class="box">ボックス4</div>
 
 	<script>
+		// クロージャはスコープ作成時の状態をスナップショットとして保存
+		// その状態を呼び出しごとに状態をアクティブにカプセル化する
+		// クロージャが存在している間は状態の変更が可能 
 		function animateIt (elementId, rate, delay) {
 			var elem = document.getElementById(elementId);
 			var tick = 0;
 
+			// クロージャ経由で３つの変数のアクセスする
+			// これら３つの変数にアクセスできるのは、スコープの中で関数を宣言しているから
 			var timer = setInterval (function () {
 				if(tick < 100){
 					elem.style.left = elem.style.top = tick*rate + "px";
