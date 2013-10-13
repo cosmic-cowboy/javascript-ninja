@@ -18,6 +18,8 @@
 	<script type="text/javascript">
 
 		function smallest (array) {
+			// apply関数では第二引数に設定された配列が実行される関数に渡される引数になる特徴を持っている
+			// つまり関数に対して普段は引数をひとつひとつ設定するが、それと同じことを配列で実現できる
 			return Math.min.apply(Math, array);
 		}
 
@@ -27,6 +29,9 @@
 		var testArray  = [0,1,2,3];
 		var minNum = 0;
 		var maxNum = 3;
+		assert(Math.min(0,1,2,3) === minNum, "引数に「0,1,2,3」を設定したときの最小値は" + minNum + "です");
+		assert(Math.max(0,1,2,3) === maxNum, "引数に「0,1,2,3」を設定したときの最大値は" + maxNum + "です");
+
 		assert(smallest(testArray) === minNum, "配列：" + testArray + "の最小値は" + minNum + "です");
 		assert(largest(testArray) === maxNum, "配列：" + testArray + "の最大値は" + maxNum + "です");
 

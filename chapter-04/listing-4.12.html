@@ -15,6 +15,8 @@
 
 	<script type="text/javascript">
 		function merge (root) {
+			// 第１引数(rootオブジェクト)に２番目以降の引数（オブジェクト）をコピーしている
+			// 基本的に引数がオブジェクトでプロパティを持っていることが前提となる
 			for (var i = 1; i < arguments.length; i++) {
 				for (var key in arguments[i]) {
 					root[key] = arguments[i][key]
