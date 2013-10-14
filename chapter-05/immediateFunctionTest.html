@@ -1,0 +1,49 @@
+<!-- chapter05：即時関数のテスト-->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+	<button id="ordinary">ordinary function</button>
+	<button id="immediate">immediate function</button>
+
+	<script>
+		var someFunction = function () {
+			return true;
+		}
+
+		assert(someFunction(), "変数をカッコなしで someFunction() で呼び出す");
+		assert((someFunction)(), "変数をカッコで囲んで (someFunction)() で呼び出す");
+		// 即時関数により、関数のインスタンス化、実行、捨てるができる
+		assert(function(){return true}(), "関数宣言をカッコなし function(){return true}() で呼び出す");
+		assert((function(){return true})(), "関数宣言をカッコで囲んで (function(){return true})() で呼び出す");
+
+		// クリックされるたびnumClicksは新規作成されるので、いつまでも1回
+		document.getElementById("ordinary").addEventListener("click", function(){
+			var numClicks = 0;
+				alert( "クリック数：" + ++numClicks + "回");
+		}, false);
+
+		// 即時関数でnumClicksをカプセル化したクロージャを作成、クリック数をカウントする関数をイベントハンドラに設定している
+		// 変数のスコープはクロージャによって決まる
+		document.getElementById("immediate").addEventListener("click", (function(){
+			var numClicks = 0;
+			return function(){
+				alert( "クリック数：" + ++numClicks + "回");
+			}
+		})(), false);
+
+
+		// パラメータありの即時関数
+		(function(what){alert(what)})("Hi, there");
+
+	</script>
+	
+</body>
+</html>
