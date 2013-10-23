@@ -1,0 +1,37 @@
+<!-- 第7章 正規表現 -->
+<!-- 7.3 正規表現のコンパイル -->
+<!-- chapter07：リスト7-2 コンパイルされた正規表現をつくる２つの方法 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+
+		// 正規表現をコンパイルし、変数に代入
+		// 正規表現でリテラル
+		var re1 = /test/i;
+		// コンストラクタで正規表現
+		var re2 = new RegExp("test", "i");
+
+		assert(re1.toString() === "/test/i", "正規表現でリテラル：式の内容を確認");
+		assert(re2.toString() === "/test/i", "コンストラクタで正規表現：式の内容を確認");
+
+		assert(re1.test("TesT"), "正規表現でリテラル：大文字と小文字を区別しない");
+		assert(re1.test("tesT"), "コンストラクタで正規表現：大文字と小文字を区別しない");
+
+		assert(re1.toString() === re2.toString(), "２つの正規表現は等しい");
+		assert(re1 !== re2, "両者は別のオブジェクト");
+
+	</script>
+	
+</body>
+</html>
+
