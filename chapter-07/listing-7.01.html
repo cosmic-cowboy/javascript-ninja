@@ -1,0 +1,60 @@
+<!-- 第7章 正規表現 -->
+<!-- 7.1   正規表現のエレガンス -->
+<!-- chapter07：リスト7-1 文字列が特定のパターンと一致するかテストする -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script>
+		function isThisAZipCode(candidate){
+			if(typeof candidate !=="string" ||
+				candidate.length != 10 ){
+				return false;
+			}
+
+			for (var n = 0; n < candidate.length; n++) {
+				var c = candidate[n];
+
+				switch(n){
+					case 0 : case 1: case 2 : case 3: case 4: 
+					case 6 : case 7: case 8 : case 9:
+						if(c < '0' || c > "9"){
+							return false;
+						}
+						break;
+					case 5 :
+						if(c !== "-"){
+							return false;
+						}
+						break;
+				}
+			}
+			return true;
+		}
+
+		function isThisAZipCode_rep (candidate) {
+			return /^\d{5}-\d{4}$/.test(candidate);
+		}
+		assert(isThisAZipCode("11111-1111"), "zip-codeを認識");
+		assert(isThisAZipCode("11111-11111"), "zip-codeではない");
+		assert(isThisAZipCode("111111-1111"), "zip-codeではない");
+
+		assert(isThisAZipCode_rep("11111-1111"), "zip-codeを認識");
+		assert(isThisAZipCode_rep("11111-11111"), "zip-codeではない");
+		assert(isThisAZipCode_rep("111111-1111"), "zip-codeではない");
+
+
+
+	</script>
+	
+</body>
+</html>
+
