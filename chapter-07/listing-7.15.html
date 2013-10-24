@@ -1,7 +1,7 @@
 <!-- 第7章 正規表現 -->
 <!-- 7.6 一般的な諸問題を正規表現で解決する -->
-<!-- 7.6.3 Unicode -->
-<!-- chapter07：リスト7-15 Unicode文字とのマッチ -->
+<!-- 7.6.4 エスケープされた文字 -->
+<!-- chapter07：リスト7-16 Unicode文字とのマッチ -->
 
 <!doctype html>
 <html lang="en">
@@ -16,9 +16,20 @@
 
 	<script type="text/javascript">
 
-		var text = "\u5FCD\u8005\u30D1\u30EF\u30FC";
-		var matchAll = /[\w\u0080-\uFFFF_-]/;
-		assert((text).match(matchAll),"正規表現がUnicodeにマッチした");
+		var pattern = /^((\w+)|(\\.)|)+$/;
+
+		// 最後のテストは「:」をエスケープしていないので失敗する
+		var tests = [
+			"formUpdate",
+			"form\\.Update\\.whatever",
+			"form\\:Update",
+			"\\f\\o\\r\\m\\U\\p\\d\\a\\t\\e",
+			"form:Update"
+		]
+
+		for(var i = 0; i < tests.length; i++){
+			assert(pattern.test(tests[i]), tests[i] + "は有効な識別子");
+		}
 
 	</script>
 	
