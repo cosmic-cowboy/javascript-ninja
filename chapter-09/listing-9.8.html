@@ -1,0 +1,48 @@
+<!-- 第9章 実行時のコード評価 -->
+<!-- 9.3 コード評価の実践 -->
+<!-- chapter09：リスト9-8 ページがロードされた後にだけ実行されるスクリプトタグの型をつくる -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		function globalEval (data) {
+			data = data.replace(/^\s* | \s*$/g, "");
+			if(data){
+				var head   = document.getElementsByTagName("head")[0] || document.documentElement;
+				var script = document.createElement("script");
+
+				script.type = "text/javascript";
+				script.text = data;
+
+				head.appendChild(script);
+				head.removeChild(script);
+
+			}
+		}
+
+		window.onload = function () {
+			var scripts = document.getElementsByTagName("script");
+			for (var i = 0; i < scripts.length; i++) {
+				if(scripts[i].type === "x/onload"){
+					globalEval(scripts[i].innerHTML);
+				}
+			};
+		}
+	</script>
+	
+	<script type="x/onload">
+		assert(true, "ページがロード時に実行された");
+	</script>
+
+</body>
+</html>
