@@ -1,0 +1,43 @@
+<!-- 第9章 実行時のコード評価 -->
+<!-- 9.1 コード評価機構 -->
+<!-- chapter09：リスト9-2 eval()から返される値のテスト -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		// 単純な変数、プリミティブ、代入文以外のものにはカッコでくくる
+		var ninja = eval("({name:'Ninja'})");
+		assert(ninja !== undefined, "ninjaが生成され");
+		assert(ninja.name === "Ninja", "nameというプロパティを持つ");
+
+		// 単純な変数、プリミティブ、代入文以外のものにはカッコでくくる
+		var fn = eval("(function () {return 'Ninja'})");
+		assert(typeof fn === "function", "関数が作成され");
+		assert(fn() === "Ninja", "期待した値を返す");
+
+		// ()がないと正しく
+		var ninja2 = eval("{name:'Ninja'}");
+		assert(ninja2 !== undefined, "ninjaが生成され");
+		assert(ninja2.name === "Ninja", "nameというプロパティを持つ");
+
+		// ()バージョン
+		var fn2 = eval("(function () {return true;})");
+		assert(fn2() === true, "関数は正しく作成された")
+		// false バージョン
+		var fn2 = eval("(function () {return true;})");
+		assert(fn2() === true, "関数は正しく作成された")
+
+	</script>
+	
+</body>
+</html>
