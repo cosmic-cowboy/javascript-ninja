@@ -1,0 +1,51 @@
+<!-- 第12章 属性、プロパティ、CSSの難関を突破する -->
+<!-- 12.1 DOMにおける属性とプロパティ -->
+<!-- chapter12：リスト12-01 DOMメソッドおよびプロパティを介して属性値をアクセスする -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+	<div></div>
+
+	<script type="text/javascript">
+
+		window.onload = function () {
+			var div = document.getElementsByTagName("div")[0];
+
+			// ninja_1
+			var ninja_1 = "ninja-1"
+			div.setAttribute("id", ninja_1);
+			assert(div.getAttribute('id') === ninja_1, "属性を変更：" + div.getAttribute('id'));
+
+			// ninja_2
+			var ninja_2 = "ninja-2"
+			div.id = ninja_2;
+			assert(div.id === ninja_2, "プロパティを変更：" + div.id);
+
+			// ninja_3
+			var ninja_3 = "ninja-3"
+			div.id = ninja_3;
+			assert(div.id === ninja_3, "プロパティを変更：" + div.id);
+			assert(div.getAttribute('id') === ninja_3, "属性経由でアクセス：" + div.getAttribute('id'));
+
+			// ninja_4
+			var ninja_4 = "ninja-4"
+			div.setAttribute("id", ninja_4);
+			assert(div.id === ninja_4, "属性経由でプロパティを変更：" + div.id);
+			assert(div.getAttribute('id') === ninja_4, "属性経由でアクセス：" + div.getAttribute('id'));
+
+
+
+		}
+
+	</script>
+</body>
+</html>

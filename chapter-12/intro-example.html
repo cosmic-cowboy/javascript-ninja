@@ -1,0 +1,27 @@
+<!-- 第12章 属性、プロパティ、CSSの難関を突破する -->
+<!-- 12.1 DOMにおける属性とプロパティ -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+	<img src="../images/ninja-with-nunchuks.png" alt="">
+
+	<script type="text/javascript">
+		var image = document.getElementsByTagName('img')[0];
+		var newSrc = '../images/ninja-with-pole.png';
+		image.src = newSrc;
+
+		assert(image.src === newSrc, '現在の画像ソースは：' + image.src);
+		assert(image.getAttribute('src') === '../images/ninja-with-nunchuks.png', '画像ソースの属性は：' + image.src);
+
+	</script>
+</body>
+</html>

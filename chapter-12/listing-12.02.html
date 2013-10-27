@@ -1,0 +1,60 @@
+<!-- 第12章 属性、プロパティ、CSSの難関を突破する -->
+<!-- 12.2 DOMにおける属性とプロパティ -->
+<!-- chapter12：リスト12-02 DOMメソッドとプロパティで性能を比較する -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+	<div id="testSubject"></div>
+
+	<script type="text/javascript">
+		var count = 5000000;
+		var n;
+		var begin = new Date();
+		var end;
+		var testSubject = document.getElementById('testSubject');
+		var value;
+
+		// DOMメソッドによる読み出しテスト
+		for (var n = 0; n < count; n++) {
+			value = testSubject.getAttribute('id');
+		}
+		end = new Date();
+		assert(true, 'Time for DOM method read : ' + (end.getTime() - begin.getTime()));
+
+		// プロパティ読み出しテスト
+		begin = new Date();
+		for (var n = 0; n < count; n++) {
+			value = testSubject.id;
+		}
+		end = new Date();
+		assert(true, 'Time for Property read : ' + (end.getTime() - begin.getTime()));
+
+		// DOMメソッドによる書き込みテスト
+		begin = new Date();
+		for (var n = 0; n < count; n++) {
+			testSubject.getAttribute('id', 'testSubject');
+		}
+		end = new Date();
+		assert(true, 'Time for DOM method write : ' + (end.getTime() - begin.getTime()));
+
+		// プロパティ書き込みテスト
+		begin = new Date();
+		for (var n = 0; n < count; n++) {
+			testSubject.id = 'testSubject';
+		}
+		end = new Date();
+		assert(true, 'Time for Property write : ' + (end.getTime() - begin.getTime()));
+
+
+	</script>
+</body>
+</html>

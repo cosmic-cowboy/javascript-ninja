@@ -1,0 +1,73 @@
+<!-- 第12章 属性、プロパティ、CSSの難関を突破する -->
+<!-- 12.1 DOMにおける属性とプロパティ -->
+<!-- chapter12：リスト12-03 属性値を取得/設定するための関数 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="../styles/assert.css" type="text/css" rel="stylesheet">
+	<script src="../scripts/assert.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+	<div id="testSubject"></div>
+
+	<script type="text/javascript">
+		(function () {
+
+			// 変換マップ
+			var translations = {
+				"for": "htmlFor",
+				"class": "className",
+				readonly: "readOnly",
+				maxlength: "maxLength",
+				cellspacing: "cellSpacing",
+				rowspan: "rowSpan",
+				colspan: "colSpan",
+				tabindex: "tabIndex",
+				cellpadding: "cellPadding",
+				usemap: "useMap",
+				frameborder: "frameBorder",
+				contenteditable: "contentEditable"
+			};
+
+			// get set 関数を定義
+			window.attr = function(element, name, value){
+				// 属性をプロパティに変換
+				var property = translations[name] || name;
+				// プロパティが存在するか、確認
+				var propertyExists = typeof element[property] !== 'undefined';
+
+				// valueが定義されている場合は値を設定
+				if(typeof value !== "undefined"){
+					if(propertyExists){
+						element[property] = value;
+					} else {
+						element.setAttribute(name, value);
+					}
+				}
+
+				// 値を取得
+				return propertyExists ? 
+					element[property] :
+					element.getAttribute(name);
+			}
+			
+		})();
+
+		var subject = document.getElementById('testSubject');
+
+		assert(attr(subject, 'id') === 'testSubject', "id値をフェッチした");
+
+		assert(attr(subject, 'id', 'other') === 'other', "新しいid値を設定");
+
+		assert(attr(subject, 'data-custom', 'whatever') === 'whatever', "カスタム属性を設定した");
+
+		assert(attr(subject, 'data-custom') === 'whatever', "カスタム属性をフェッチした");
+
+	</script>
+</body>
+</html>
