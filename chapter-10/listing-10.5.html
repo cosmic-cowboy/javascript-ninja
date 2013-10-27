@@ -1,0 +1,29 @@
+<!-- 第10章 with文 -->
+<!-- 10.5 withによるテンプレーティング -->
+<!-- chapter10：リスト10-4 HTMLページを生成するテンプレートの例 -->
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+      <script src="../scripts/assert.js" type="text/javascript"></script>
+      <link href="../styles/assert.css" type="text/css" rel="stylesheet">
+      <script type="text/javascript" src="tmpl.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript">
+
+		assert(tmpl("Hello, <%= name %>!", {name:"world"}) ==
+		"Hello, world!", "単純な変数を含むテンプレーティングの実行。");
+
+		var hello = tmpl("Hello, <%= name %>!");
+		assert(hello({name:"world"}) == "Hello, world!",
+		"コンパイル済みのテンプレートを使う。");
+
+	</script>
+  </body>
+</html>
